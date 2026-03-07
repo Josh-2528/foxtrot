@@ -41,7 +41,7 @@ export default function StepBrandKit({ data, updateData }: Props) {
       <h2 className="text-xl font-bold text-white mb-1">Brand Kit</h2>
       <p className="text-slate-400 text-sm mb-6">
         Upload your logo and set your brand colours. These will be used across
-        your review responses.
+        all your generated social media content.
       </p>
 
       {/* Logo upload */}

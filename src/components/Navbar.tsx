@@ -19,6 +19,12 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
+            <a
+              href="/#demo"
+              className="text-slate-300 hover:text-white text-sm font-medium transition"
+            >
+              Features
+            </a>
             <Link
               href="/pricing"
               className="text-slate-300 hover:text-white text-sm font-medium transition"
@@ -29,13 +35,13 @@ export default function Navbar() {
               href="/login"
               className="text-slate-300 hover:text-white text-sm font-medium transition"
             >
-              Sign In
+              Login
             </Link>
             <Link
               href="/signup"
               className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-lg px-4 py-2 transition"
             >
-              Get Started
+              Start Free Trial
             </Link>
           </div>
 
@@ -53,6 +59,13 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-navy-900 border-t border-navy-800">
           <div className="px-4 py-4 space-y-3">
+            <a
+              href="/#demo"
+              onClick={() => setMobileOpen(false)}
+              className="block text-slate-300 hover:text-white text-sm font-medium py-2"
+            >
+              Features
+            </a>
             <Link
               href="/pricing"
               onClick={() => setMobileOpen(false)}
@@ -65,14 +78,14 @@ export default function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="block text-slate-300 hover:text-white text-sm font-medium py-2"
             >
-              Sign In
+              Login
             </Link>
             <Link
               href="/signup"
               onClick={() => setMobileOpen(false)}
               className="block bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-lg px-4 py-2.5 text-center transition"
             >
-              Get Started
+              Start Free Trial
             </Link>
           </div>
         </div>

@@ -9,17 +9,11 @@ interface Props {
 
 const vibes = [
   {
-    id: "minimal",
-    title: "Minimal",
-    description: "Clean, spacious, and understated. Let the content breathe.",
-    preview: {
-      bg: "#f8fafc",
-      accent: "#0f172a",
-      text: "#334155",
-      style: "border-l-4 border-slate-900",
-    },
+    id: "clean_minimal",
+    title: "Clean & Minimal",
+    description: "White space, simple layouts, thin fonts. Let the content breathe.",
     mockup: (
-      <div className="space-y-2 p-3">
+      <div className="space-y-2 p-3 bg-white rounded">
         <div className="h-2 w-16 bg-slate-800 rounded-full" />
         <div className="h-1.5 w-full bg-slate-200 rounded-full" />
         <div className="h-1.5 w-3/4 bg-slate-200 rounded-full" />
@@ -28,15 +22,9 @@ const vibes = [
     ),
   },
   {
-    id: "bold",
-    title: "Bold",
-    description: "High contrast, strong typography. Makes a statement.",
-    preview: {
-      bg: "#0f0f0f",
-      accent: "#ff3d00",
-      text: "#ffffff",
-      style: "border-l-4 border-red-500",
-    },
+    id: "bold_loud",
+    title: "Bold & Loud",
+    description: "Big text, high contrast, punchy colours. Makes a statement.",
     mockup: (
       <div className="space-y-2 p-3 bg-neutral-900 rounded">
         <div className="h-3 w-20 bg-red-500 rounded-full" />
@@ -47,78 +35,54 @@ const vibes = [
     ),
   },
   {
-    id: "playful",
-    title: "Playful",
-    description: "Rounded corners, bright pops, and a friendly feel.",
-    preview: {
-      bg: "#fef3c7",
-      accent: "#f59e0b",
-      text: "#78350f",
-      style: "border-l-4 border-amber-400",
-    },
+    id: "dark_premium",
+    title: "Dark & Premium",
+    description: "Dark backgrounds, gold/green accents, luxury feel.",
+    mockup: (
+      <div className="space-y-2 p-3 bg-gray-900 rounded">
+        <div className="h-2 w-16 bg-amber-400 rounded-full" />
+        <div className="h-1.5 w-full bg-gray-700 rounded-full" />
+        <div className="h-1.5 w-3/4 bg-gray-700 rounded-full" />
+        <div className="h-6 w-20 bg-amber-400 rounded mt-3" />
+      </div>
+    ),
+  },
+  {
+    id: "bright_fun",
+    title: "Bright & Fun",
+    description: "Colourful, playful, energetic. Rounded corners and pops of colour.",
     mockup: (
       <div className="space-y-2 p-3 bg-amber-50 rounded-xl">
-        <div className="h-3 w-16 bg-amber-400 rounded-full" />
+        <div className="h-3 w-16 bg-pink-500 rounded-full" />
         <div className="h-1.5 w-full bg-amber-200 rounded-full" />
-        <div className="h-1.5 w-4/5 bg-amber-200 rounded-full" />
-        <div className="h-6 w-20 bg-amber-400 rounded-full mt-3" />
+        <div className="h-1.5 w-4/5 bg-pink-200 rounded-full" />
+        <div className="h-6 w-20 bg-pink-500 rounded-full mt-3" />
       </div>
     ),
   },
   {
-    id: "elegant",
-    title: "Elegant",
-    description: "Refined typography, muted tones, and subtle luxury.",
-    preview: {
-      bg: "#faf9f7",
-      accent: "#92764a",
-      text: "#44403c",
-      style: "border-l-4 border-amber-700",
-    },
+    id: "earthy_natural",
+    title: "Earthy & Natural",
+    description: "Muted tones, organic textures, warm and grounded.",
     mockup: (
-      <div className="space-y-2 p-3 bg-stone-50 rounded">
-        <div className="h-2 w-24 bg-amber-700 rounded-full" />
-        <div className="h-1.5 w-full bg-stone-200 rounded-full" />
-        <div className="h-1.5 w-3/4 bg-stone-200 rounded-full" />
-        <div className="h-6 w-20 bg-amber-700/80 rounded mt-3" />
+      <div className="space-y-2 p-3 bg-stone-100 rounded-lg">
+        <div className="h-2 w-16 bg-green-700 rounded-full" />
+        <div className="h-1.5 w-full bg-stone-300 rounded-full" />
+        <div className="h-1.5 w-4/5 bg-stone-300 rounded-full" />
+        <div className="h-6 w-20 bg-green-700 rounded-full mt-3" />
       </div>
     ),
   },
   {
-    id: "industrial",
-    title: "Industrial",
-    description: "Raw, utilitarian design. Exposed structure and grit.",
-    preview: {
-      bg: "#1c1917",
-      accent: "#facc15",
-      text: "#a8a29e",
-      style: "border-l-4 border-yellow-400",
-    },
+    id: "corporate",
+    title: "Corporate & Professional",
+    description: "Structured, navy/grey, formal. Clean and authoritative.",
     mockup: (
-      <div className="space-y-2 p-3 bg-stone-900 rounded">
-        <div className="h-3 w-16 bg-yellow-400 rounded-sm" />
-        <div className="h-1.5 w-full bg-stone-700 rounded-sm" />
-        <div className="h-1.5 w-2/3 bg-stone-700 rounded-sm" />
-        <div className="h-6 w-20 bg-yellow-400 rounded-sm mt-3" />
-      </div>
-    ),
-  },
-  {
-    id: "organic",
-    title: "Organic",
-    description: "Natural textures, earthy tones, soft and flowing.",
-    preview: {
-      bg: "#f0fdf4",
-      accent: "#16a34a",
-      text: "#14532d",
-      style: "border-l-4 border-green-600",
-    },
-    mockup: (
-      <div className="space-y-2 p-3 bg-green-50 rounded-2xl">
-        <div className="h-2 w-16 bg-green-600 rounded-full" />
-        <div className="h-1.5 w-full bg-green-200 rounded-full" />
-        <div className="h-1.5 w-4/5 bg-green-200 rounded-full" />
-        <div className="h-6 w-20 bg-green-600 rounded-full mt-3" />
+      <div className="space-y-2 p-3 bg-slate-100 rounded">
+        <div className="h-2 w-24 bg-navy-800 rounded-sm" />
+        <div className="h-1.5 w-full bg-slate-300 rounded-sm" />
+        <div className="h-1.5 w-3/4 bg-slate-300 rounded-sm" />
+        <div className="h-6 w-20 bg-blue-600 rounded-sm mt-3" />
       </div>
     ),
   },
@@ -129,7 +93,8 @@ export default function StepVibe({ data, updateData }: Props) {
     <div>
       <h2 className="text-xl font-bold text-white mb-1">Choose your vibe</h2>
       <p className="text-slate-400 text-sm mb-6">
-        Select a visual style that best represents your brand personality.
+        Select a visual style for your social media posts. This drives all
+        future visual generation.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

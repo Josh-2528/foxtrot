@@ -22,8 +22,8 @@ export default function PrivacyPage() {
               </h2>
               <p className="text-slate-300 text-sm leading-relaxed">
                 We collect information you provide when creating an account
-                (name, email, password), data from your connected Google
-                Business Profile (reviews, business information), and usage data
+                (name, email, password), business information you provide during
+                onboarding (website URL, brand assets, industry), and usage data
                 to improve the Service.
               </p>
             </section>
@@ -34,9 +34,9 @@ export default function PrivacyPage() {
               </h2>
               <p className="text-slate-300 text-sm leading-relaxed">
                 We use your information to provide and improve the Service,
-                generate AI review replies, send notifications about new
-                reviews, process payments, and communicate with you about your
-                account.
+                generate AI-powered social media content, send notifications
+                about new content, process payments, and communicate with you
+                about your account.
               </p>
             </section>
 
@@ -47,8 +47,8 @@ export default function PrivacyPage() {
               <p className="text-slate-300 text-sm leading-relaxed">
                 We do not sell your personal information. We share data with
                 third-party service providers only as necessary to operate the
-                Service: Supabase (database), Anthropic (AI processing), Stripe
-                (payments), Resend (email), and Google (Business Profile API).
+                Service: Supabase (database and storage), Anthropic (AI content
+                generation), Stripe (payments), and Resend (email).
               </p>
             </section>
 
@@ -57,10 +57,10 @@ export default function PrivacyPage() {
                 4. AI Processing
               </h2>
               <p className="text-slate-300 text-sm leading-relaxed">
-                Review content is sent to Anthropic&apos;s Claude API to
-                generate reply suggestions. This data is processed according to
-                Anthropic&apos;s data usage policies and is not used to train AI
-                models.
+                Business information and content preferences are sent to
+                Anthropic&apos;s Claude API to generate social media content.
+                This data is processed according to Anthropic&apos;s data usage
+                policies and is not used to train AI models.
               </p>
             </section>
 
@@ -105,10 +105,10 @@ export default function PrivacyPage() {
               <p className="text-slate-300 text-sm leading-relaxed">
                 For privacy-related inquiries, contact us at{" "}
                 <a
-                  href="mailto:admin@carwashai.com.au"
+                  href="mailto:josh@obvitech.com.au"
                   className="text-green-400 hover:text-green-300"
                 >
-                  admin@carwashai.com.au
+                  josh@obvitech.com.au
                 </a>
                 .
               </p>

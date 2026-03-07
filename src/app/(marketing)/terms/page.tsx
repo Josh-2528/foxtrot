@@ -32,10 +32,10 @@ export default function TermsPage() {
                 2. Description of Service
               </h2>
               <p className="text-slate-300 text-sm leading-relaxed">
-                Foxtrot provides AI-powered Google Review management tools
-                including review monitoring, AI-generated reply suggestions, and
-                automated publishing capabilities. The Service integrates with
-                Google Business Profile APIs to facilitate review management.
+                Foxtrot provides AI-powered social media content creation tools
+                including post idea generation, branded visual creation, caption
+                writing, and content calendar management. The Service uses
+                artificial intelligence to generate ready-to-post content.
               </p>
             </section>
 
@@ -57,8 +57,8 @@ export default function TermsPage() {
               </h2>
               <p className="text-slate-300 text-sm leading-relaxed">
                 You agree not to misuse the Service. This includes but is not
-                limited to: generating misleading or fraudulent review replies,
-                violating Google&apos;s Terms of Service, using the Service for
+                limited to: generating misleading or fraudulent content,
+                using the Service to create deceptive material, using the Service for
                 any unlawful purpose, or attempting to gain unauthorized access
                 to any part of the Service.
               </p>
@@ -69,10 +69,11 @@ export default function TermsPage() {
                 5. AI-Generated Content
               </h2>
               <p className="text-slate-300 text-sm leading-relaxed">
-                The Service uses artificial intelligence to generate review
-                replies. You acknowledge that AI-generated content should be
-                reviewed before publishing, and you are solely responsible for
-                any content published through the Service on your behalf.
+                The Service uses artificial intelligence to generate social
+                media content including visuals, captions, and hashtags. You
+                acknowledge that AI-generated content should be reviewed before
+                posting, and you are solely responsible for any content published
+                using materials created by the Service.
               </p>
             </section>
 
@@ -106,10 +107,10 @@ export default function TermsPage() {
               <p className="text-slate-300 text-sm leading-relaxed">
                 For questions about these Terms, contact us at{" "}
                 <a
-                  href="mailto:admin@carwashai.com.au"
+                  href="mailto:josh@obvitech.com.au"
                   className="text-green-400 hover:text-green-300"
                 >
-                  admin@carwashai.com.au
+                  josh@obvitech.com.au
                 </a>
                 .
               </p>

@@ -8,9 +8,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Foxtrot — AI-Powered Review Management",
+  title: "Foxtrot — AI-Powered Social Media Content Creator",
   description:
-    "Monitor, respond to, and manage your Google Business reviews with AI. Built for car wash operators.",
+    "Foxtrot generates ready-to-post social media content for your business — visuals, captions, hashtags, and all.",
 };
 
 export default function RootLayout({

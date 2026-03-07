@@ -6,57 +6,53 @@ import { CheckCircle2 } from "lucide-react";
 const plans = [
   {
     name: "Starter",
-    price: "$0",
-    period: "forever",
-    description: "Perfect for trying out Foxtrot with a single location.",
+    price: "$29",
+    period: "/month",
+    description: "Perfect for small businesses getting started with social content.",
     cta: "Get Started",
     ctaHref: "/signup",
     highlighted: false,
     features: [
-      "1 Google Business location",
-      "AI-generated reply drafts",
-      "Manual publish only",
-      "Email notifications",
-      "7-day review history",
+      "15 posts per month",
+      "AI graphic posts only",
+      "Basic caption generation",
+      "1 brand kit",
+      "Download images + copy captions",
     ],
   },
   {
     name: "Pro",
-    price: "$88",
+    price: "$49",
     period: "/month",
-    description: "Everything you need for serious review management.",
+    description: "Unlimited content with full customisation and calendar.",
     cta: "Start Free Trial",
     ctaHref: "/signup",
     highlighted: true,
     badge: "Most Popular",
     features: [
-      "Up to 3 locations",
-      "AI-generated replies",
-      "Smart auto-publish (4-5 stars)",
-      "Negative review alerts",
-      "Custom AI voice & tone",
-      "Performance analytics",
-      "Priority email support",
-      "Unlimited review history",
+      "Unlimited posts",
+      "AI graphic + photo-based posts",
+      "Full caption customisation (style, tone, CTA)",
+      "Content calendar",
+      "Batch generation",
+      "1 brand kit",
+      "Priority generation",
     ],
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "For multi-location operators with 4+ car washes.",
-    cta: "Contact Us",
-    ctaHref: "mailto:admin@carwashai.com.au",
+    name: "Agency",
+    price: "$99",
+    period: "/month",
+    description: "For agencies and multi-brand businesses.",
+    cta: "Get Started",
+    ctaHref: "/signup",
     highlighted: false,
     features: [
-      "Unlimited locations",
       "Everything in Pro",
-      "Dedicated account manager",
-      "Custom API integrations",
-      "Advanced analytics & reporting",
-      "SLA guarantee",
-      "White-label option",
-      "Phone support",
+      "Up to 5 brand kits (multiple businesses)",
+      "Team access (invite collaborators)",
+      "White-label exports (no Foxtrot branding)",
+      "Priority support",
     ],
   },
 ];
@@ -73,8 +69,8 @@ export default function PricingPage() {
               Simple, transparent pricing
             </h1>
             <p className="mt-4 text-slate-400 text-lg max-w-xl mx-auto">
-              Start free, upgrade when you&apos;re ready. No hidden fees, no
-              contracts.
+              Start creating content today. Upgrade when you&apos;re ready. No
+              hidden fees, no contracts.
             </p>
           </div>
 
@@ -144,8 +140,7 @@ export default function PricingPage() {
 
           <div className="mt-16 text-center">
             <p className="text-slate-400 text-sm">
-              All paid plans include a 14-day free trial. No credit card
-              required.
+              Pro plan includes a 14-day free trial. No credit card required.
             </p>
           </div>
         </div>

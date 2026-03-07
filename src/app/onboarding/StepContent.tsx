@@ -37,13 +37,13 @@ export default function StepContent({ data, updateData }: Props) {
         Content Preferences
       </h2>
       <p className="text-slate-400 text-sm mb-6">
-        Set the tone and key details for your AI-generated review replies.
+        Set the tone and style for your AI-generated social media content.
       </p>
 
       {/* Tone selection */}
       <div className="mb-6">
         <label className="block text-sm font-medium text-slate-300 mb-3">
-          Reply Tone
+          Caption Tone
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {tones.map((tone) => {
@@ -81,7 +81,7 @@ export default function StepContent({ data, updateData }: Props) {
             type="text"
             value={data.targetAudience}
             onChange={(e) => updateData({ targetAudience: e.target.value })}
-            placeholder="e.g., Families, car enthusiasts, fleet managers"
+            placeholder="e.g., Local families, young professionals, foodies"
             className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
           />
         </div>
@@ -94,7 +94,7 @@ export default function StepContent({ data, updateData }: Props) {
             type="text"
             value={data.keyServices}
             onChange={(e) => updateData({ keyServices: e.target.value })}
-            placeholder="e.g., Express wash, full detail, hand wax (comma-separated)"
+            placeholder="e.g., Coffee, brunch, catering, events (comma-separated)"
             className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
           />
           <p className="text-xs text-slate-500 mt-1">Separate with commas</p>
@@ -110,7 +110,7 @@ export default function StepContent({ data, updateData }: Props) {
             onChange={(e) =>
               updateData({ uniqueSellingPoints: e.target.value })
             }
-            placeholder="e.g., Eco-friendly, open 24/7, locally owned (comma-separated)"
+            placeholder="e.g., Locally owned, award-winning, eco-friendly (comma-separated)"
             className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
           />
           <p className="text-xs text-slate-500 mt-1">Separate with commas</p>

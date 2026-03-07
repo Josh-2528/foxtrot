@@ -70,7 +70,7 @@ export default function StepWebsite({ data, updateData }: Props) {
               type="url"
               value={data.websiteUrl}
               onChange={(e) => updateData({ websiteUrl: e.target.value })}
-              placeholder="https://yourcarwash.com.au"
+              placeholder="https://yourbusiness.com.au"
               className="w-full bg-navy-800 border border-navy-600 rounded-lg pl-9 pr-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
             />
           </div>
@@ -106,7 +106,7 @@ export default function StepWebsite({ data, updateData }: Props) {
             type="text"
             value={data.businessName}
             onChange={(e) => updateData({ businessName: e.target.value })}
-            placeholder="Sparkle Car Wash"
+            placeholder="Your Business Name"
             className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
           />
         </div>
@@ -136,14 +136,15 @@ export default function StepWebsite({ data, updateData }: Props) {
             className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
           >
             <option value="">Select an industry</option>
-            <option value="car_wash_self_serve">Car Wash — Self-Serve</option>
-            <option value="car_wash_full_service">
-              Car Wash — Full-Service
-            </option>
-            <option value="car_wash_express">Car Wash — Express</option>
-            <option value="car_wash_detailing">Car Wash — Detailing</option>
-            <option value="car_wash_multi">Car Wash — Multi-Location</option>
-            <option value="auto_service">Automotive Service</option>
+            <option value="cafe_restaurant">Cafe / Restaurant</option>
+            <option value="gym_fitness">Gym / Fitness</option>
+            <option value="salon_beauty">Salon / Beauty</option>
+            <option value="trades">Trades / Home Services</option>
+            <option value="retail">Retail / E-Commerce</option>
+            <option value="car_wash">Car Wash / Automotive</option>
+            <option value="health_wellness">Health / Wellness</option>
+            <option value="professional_services">Professional Services</option>
+            <option value="real_estate">Real Estate</option>
             <option value="other">Other</option>
           </select>
         </div>

@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
-  Star,
-  MessageSquare,
+  Lightbulb,
+  Wand2,
+  FileImage,
+  Palette,
   Settings,
   LogOut,
   Menu,
@@ -17,9 +19,11 @@ import { useRouter } from "next/navigation";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/dashboard/reviews", label: "Reviews", icon: Star },
-  { href: "/dashboard/replies", label: "Replies", icon: MessageSquare },
-  { href: "/dashboard/settings", label: "Settings", icon: Settings },
+  { href: "/ideas", label: "Ideas", icon: Lightbulb },
+  { href: "/create", label: "Create", icon: Wand2 },
+  { href: "/posts", label: "Posts", icon: FileImage },
+  { href: "/brand-kit", label: "Brand Kit", icon: Palette },
+  { href: "/settings", label: "Settings", icon: Settings },
 ];
 
 export default function Sidebar() {

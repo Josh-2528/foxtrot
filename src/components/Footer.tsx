@@ -10,14 +10,22 @@ export default function Footer() {
               fox<span className="text-green-400">trot</span>
             </span>
             <p className="text-slate-400 text-sm mt-3 max-w-md">
-              AI-powered Google Review management for car wash operators. Monitor,
-              respond, and grow your reputation on autopilot.
+              AI-powered social media content creation for businesses. Visuals,
+              captions, hashtags — all on brand, every time.
             </p>
           </div>
 
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
             <ul className="space-y-2">
+              <li>
+                <a
+                  href="/#demo"
+                  className="text-slate-400 hover:text-white text-sm transition"
+                >
+                  Features
+                </a>
+              </li>
               <li>
                 <Link
                   href="/pricing"
@@ -31,7 +39,7 @@ export default function Footer() {
                   href="/login"
                   className="text-slate-400 hover:text-white text-sm transition"
                 >
-                  Sign In
+                  Login
                 </Link>
               </li>
             </ul>
@@ -62,7 +70,8 @@ export default function Footer() {
 
         <div className="border-t border-navy-800 mt-10 pt-6 text-center">
           <p className="text-slate-500 text-sm">
-            &copy; {new Date().getFullYear()} Foxtrot. All rights reserved.
+            &copy; {new Date().getFullYear()} Obvitech Pty Ltd. All rights
+            reserved.
           </p>
         </div>
       </div>
