@@ -19,12 +19,12 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
-            <a
+            <Link
               href="/#demo"
               className="text-slate-300 hover:text-white text-sm font-medium transition"
             >
               Features
-            </a>
+            </Link>
             <Link
               href="/pricing"
               className="text-slate-300 hover:text-white text-sm font-medium transition"
@@ -59,13 +59,13 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-navy-900 border-t border-navy-800">
           <div className="px-4 py-4 space-y-3">
-            <a
+            <Link
               href="/#demo"
               onClick={() => setMobileOpen(false)}
               className="block text-slate-300 hover:text-white text-sm font-medium py-2"
             >
               Features
-            </a>
+            </Link>
             <Link
               href="/pricing"
               onClick={() => setMobileOpen(false)}

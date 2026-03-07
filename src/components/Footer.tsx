@@ -19,12 +19,12 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href="/#demo"
                   className="text-slate-400 hover:text-white text-sm transition"
                 >
                   Features
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
