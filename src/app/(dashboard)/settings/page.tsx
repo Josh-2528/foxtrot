@@ -1,18 +1,130 @@
 "use client";
 
-import { Settings, User, Bell, CreditCard } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Settings, User, Bell, CreditCard, Loader2 } from "lucide-react";
+import Toggle from "@/components/Toggle";
+
+interface UserProfile {
+  email: string;
+  business_name: string | null;
+  industry: string | null;
+  posting_frequency: string;
+  caption_style: string;
+  caption_tone: string;
+  default_cta: string;
+  default_hashtags: string | null;
+  email_new_content: boolean;
+  email_weekly_summary: boolean;
+  plan_id: string;
+  trial_started_at: string | null;
+}
 
 export default function SettingsPage() {
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [profile, setProfile] = useState<UserProfile>({
+    email: "",
+    business_name: "",
+    industry: "",
+    posting_frequency: "3_week",
+    caption_style: "medium",
+    caption_tone: "casual",
+    default_cta: "Link in bio",
+    default_hashtags: "",
+    email_new_content: true,
+    email_weekly_summary: true,
+    plan_id: "trial",
+    trial_started_at: null,
+  });
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.user) setProfile(data.user);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  function updateField(field: string, value: unknown) {
+    setProfile((prev) => ({ ...prev, [field]: value }));
+    setSaved(false);
+  }
+
+  async function handleSave() {
+    setSaving(true);
+    try {
+      await fetch("/api/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          business_name: profile.business_name,
+          industry: profile.industry,
+          posting_frequency: profile.posting_frequency,
+          caption_style: profile.caption_style,
+          caption_tone: profile.caption_tone,
+          default_cta: profile.default_cta,
+          default_hashtags: profile.default_hashtags,
+          email_new_content: profile.email_new_content,
+          email_weekly_summary: profile.email_weekly_summary,
+        }),
+      });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (err) {
+      console.error("Save error:", err);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  // Calculate trial days remaining
+  const trialDaysLeft = profile.trial_started_at
+    ? Math.max(
+        0,
+        14 -
+          Math.floor(
+            (Date.now() - new Date(profile.trial_started_at).getTime()) /
+              (1000 * 60 * 60 * 24)
+          )
+      )
+    : 14;
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="animate-spin text-violet-400" size={32} />
+      </div>
+    );
+  }
+
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">Settings</h1>
-        <p className="text-slate-400 text-sm mt-1">
-          Manage your account, preferences, and billing.
-        </p>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Settings</h1>
+          <p className="text-slate-400 text-sm mt-1">
+            Manage your account, preferences, and billing.
+          </p>
+        </div>
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="bg-violet-500 hover:bg-violet-600 disabled:opacity-50 text-white font-semibold rounded-lg px-5 py-2.5 text-sm transition flex items-center gap-2"
+        >
+          {saving ? (
+            <Loader2 size={14} className="animate-spin" />
+          ) : saved ? (
+            "Saved!"
+          ) : (
+            "Save Changes"
+          )}
+        </button>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-6 max-w-2xl">
         {/* Account */}
         <div className="bg-navy-900 border border-navy-700 rounded-xl p-6">
           <div className="flex items-center gap-3 mb-6">
@@ -21,29 +133,23 @@ export default function SettingsPage() {
             </div>
             <h3 className="font-semibold text-white">Account</h3>
           </div>
-
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
               <input
                 type="email"
                 disabled
-                placeholder="you@example.com"
+                value={profile.email}
                 className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-slate-400 text-sm cursor-not-allowed"
               />
-              <p className="text-xs text-slate-500 mt-1">
-                Contact support to change your email.
-              </p>
+              <p className="text-xs text-slate-500 mt-1">Contact support to change your email.</p>
             </div>
-
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                Business Name
-              </label>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Business Name</label>
               <input
                 type="text"
+                value={profile.business_name || ""}
+                onChange={(e) => updateField("business_name", e.target.value)}
                 placeholder="Your Business"
                 className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
               />
@@ -59,25 +165,61 @@ export default function SettingsPage() {
             </div>
             <h3 className="font-semibold text-white">Content Preferences</h3>
           </div>
-
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                Caption Tone
-              </label>
-              <select className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm">
-                <option value="friendly">Friendly</option>
-                <option value="professional">Professional</option>
-                <option value="casual">Casual</option>
-                <option value="formal">Formal</option>
-              </select>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1.5">Caption Style</label>
+                <select
+                  value={profile.caption_style}
+                  onChange={(e) => updateField("caption_style", e.target.value)}
+                  className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
+                >
+                  <option value="short">Short & Sharp</option>
+                  <option value="medium">Medium</option>
+                  <option value="long">Long & Detailed</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1.5">Caption Tone</label>
+                <select
+                  value={profile.caption_tone}
+                  onChange={(e) => updateField("caption_tone", e.target.value)}
+                  className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
+                >
+                  <option value="professional">Professional</option>
+                  <option value="casual">Casual</option>
+                  <option value="witty">Witty</option>
+                  <option value="motivational">Motivational</option>
+                </select>
+              </div>
             </div>
-
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                Posting Frequency
-              </label>
-              <select className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm">
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Default CTA</label>
+              <input
+                type="text"
+                value={profile.default_cta || ""}
+                onChange={(e) => updateField("default_cta", e.target.value)}
+                placeholder="Link in bio"
+                className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Default Hashtags</label>
+              <textarea
+                value={profile.default_hashtags || ""}
+                onChange={(e) => updateField("default_hashtags", e.target.value)}
+                placeholder="#yourbrand #yourindustry"
+                rows={2}
+                className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm resize-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Posting Frequency</label>
+              <select
+                value={profile.posting_frequency}
+                onChange={(e) => updateField("posting_frequency", e.target.value)}
+                className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
+              >
                 <option value="3_week">3 posts per week</option>
                 <option value="5_week">5 posts per week</option>
                 <option value="daily">Daily</option>
@@ -94,35 +236,19 @@ export default function SettingsPage() {
             </div>
             <h3 className="font-semibold text-white">Notifications</h3>
           </div>
-
-          <div className="space-y-4">
-            <label className="flex items-center justify-between cursor-pointer">
-              <div>
-                <p className="text-sm font-medium text-white">
-                  New content ready
-                </p>
-                <p className="text-xs text-slate-400">
-                  Get notified when new posts are generated
-                </p>
-              </div>
-              <div className="w-10 h-6 bg-violet-500 rounded-full relative">
-                <div className="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full" />
-              </div>
-            </label>
-
-            <label className="flex items-center justify-between cursor-pointer">
-              <div>
-                <p className="text-sm font-medium text-white">
-                  Weekly summary
-                </p>
-                <p className="text-xs text-slate-400">
-                  Receive a weekly content performance summary
-                </p>
-              </div>
-              <div className="w-10 h-6 bg-violet-500 rounded-full relative">
-                <div className="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full" />
-              </div>
-            </label>
+          <div className="space-y-5">
+            <Toggle
+              enabled={profile.email_new_content}
+              onChange={(v) => updateField("email_new_content", v)}
+              label="New content ready"
+              description="Get notified when new posts are generated"
+            />
+            <Toggle
+              enabled={profile.email_weekly_summary}
+              onChange={(v) => updateField("email_weekly_summary", v)}
+              label="Weekly summary"
+              description="Receive a weekly content performance summary"
+            />
           </div>
         </div>
 
@@ -134,17 +260,22 @@ export default function SettingsPage() {
             </div>
             <h3 className="font-semibold text-white">Billing</h3>
           </div>
-
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-white">Free Trial</p>
-              <p className="text-xs text-slate-400">
-                14 days remaining
+              <p className="text-sm font-medium text-white capitalize">
+                {profile.plan_id === "trial" ? "Free Trial" : profile.plan_id} Plan
               </p>
+              {profile.plan_id === "trial" && (
+                <p className="text-xs text-slate-400">
+                  {trialDaysLeft} day{trialDaysLeft !== 1 ? "s" : ""} remaining
+                </p>
+              )}
             </div>
-            <button className="bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-lg px-4 py-2 text-sm transition">
-              Upgrade to Pro
-            </button>
+            {profile.plan_id === "trial" && (
+              <button className="bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-lg px-4 py-2 text-sm transition">
+                Upgrade to Pro
+              </button>
+            )}
           </div>
         </div>
       </div>
