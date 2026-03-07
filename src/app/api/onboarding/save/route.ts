@@ -41,9 +41,9 @@ export async function POST(request: Request) {
     {
       user_id: user.id,
       logo_url: body.logo_url || null,
-      primary_colour: body.primary_color || "#10b981",
+      primary_colour: body.primary_color || "#8b5cf6",
       secondary_colour: body.secondary_color || "#0f1729",
-      accent_colour: body.accent_color || "#f59e0b",
+      accent_colour: body.accent_color || "#a78bfa",
       vibe: body.vibe || "clean_minimal",
       extracted_from_website: body.website_url
         ? {

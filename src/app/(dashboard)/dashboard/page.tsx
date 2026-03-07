@@ -72,10 +72,10 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         <Link
           href="/ideas"
-          className="bg-navy-900 border border-navy-700 rounded-xl p-6 hover:border-green-500/30 transition group flex items-start gap-4"
+          className="bg-navy-900 border border-navy-700 rounded-xl p-6 hover:border-violet-500/30 transition group flex items-start gap-4"
         >
-          <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-green-500/20 transition">
-            <Lightbulb size={20} className="text-green-400" />
+          <div className="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-violet-500/20 transition">
+            <Lightbulb size={20} className="text-violet-400" />
           </div>
           <div>
             <h3 className="font-semibold text-white mb-1">Generate Ideas</h3>
@@ -87,10 +87,10 @@ export default function DashboardPage() {
 
         <Link
           href="/brand-kit"
-          className="bg-navy-900 border border-navy-700 rounded-xl p-6 hover:border-green-500/30 transition group flex items-start gap-4"
+          className="bg-navy-900 border border-navy-700 rounded-xl p-6 hover:border-violet-500/30 transition group flex items-start gap-4"
         >
-          <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-green-500/20 transition">
-            <Palette size={20} className="text-green-400" />
+          <div className="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-violet-500/20 transition">
+            <Palette size={20} className="text-violet-400" />
           </div>
           <div>
             <h3 className="font-semibold text-white mb-1">Brand Kit</h3>
@@ -105,7 +105,7 @@ export default function DashboardPage() {
       <div className="bg-navy-900 border border-navy-700 rounded-xl overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-navy-700">
           <div className="flex items-center gap-3">
-            <CalendarDays size={18} className="text-green-400" />
+            <CalendarDays size={18} className="text-violet-400" />
             <h2 className="font-semibold text-white">Content Calendar</h2>
           </div>
           <div className="flex items-center gap-2">
@@ -154,7 +154,7 @@ export default function DashboardPage() {
                   <span
                     className={`inline-flex items-center justify-center text-xs w-6 h-6 rounded-full ${
                       isToday
-                        ? "bg-green-500 text-white font-bold"
+                        ? "bg-violet-500 text-white font-bold"
                         : "text-slate-400"
                     }`}
                   >
@@ -172,7 +172,7 @@ export default function DashboardPage() {
             No posts scheduled yet.{" "}
             <Link
               href="/ideas"
-              className="text-green-400 hover:text-green-300 font-medium"
+              className="text-violet-400 hover:text-violet-300 font-medium"
             >
               Generate ideas
             </Link>{" "}

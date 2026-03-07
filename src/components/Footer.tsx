@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <span className="text-2xl font-bold text-white">
-              fox<span className="text-green-400">trot</span>
+              fox<span className="text-violet-400">trot</span>
             </span>
             <p className="text-slate-400 text-sm mt-3 max-w-md">
               AI-powered social media content creation for businesses. Visuals,

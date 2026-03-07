@@ -107,15 +107,15 @@ export default function HomePage() {
 
       {/* ── HERO (dark navy) ── */}
       <section className="relative pt-32 pb-20 px-4 overflow-hidden">
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-green-400/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-violet-400/5 rounded-full blur-3xl" />
 
         <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left — copy */}
           <div>
-            <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/20 rounded-full px-4 py-1.5 mb-6">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 text-sm font-medium">
+            <div className="inline-flex items-center gap-2 bg-violet-500/10 border border-violet-500/20 rounded-full px-4 py-1.5 mb-6">
+              <span className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
+              <span className="text-violet-400 text-sm font-medium">
                 AI-Powered Content Creation
               </span>
             </div>
@@ -125,7 +125,7 @@ export default function HomePage() {
               <br />
               Created By AI.
               <br />
-              <span className="text-green-400">On Brand. Every Time.</span>
+              <span className="text-violet-400">On Brand. Every Time.</span>
             </h1>
 
             <p className="mt-6 text-lg text-slate-400 max-w-lg leading-relaxed">
@@ -137,7 +137,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col sm:flex-row items-start gap-4">
               <Link
                 href="/signup"
-                className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl px-8 py-3.5 text-lg transition flex items-center justify-center gap-2 group"
+                className="w-full sm:w-auto bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-xl px-8 py-3.5 text-lg transition flex items-center justify-center gap-2 group"
               >
                 Start Free Trial
                 <ArrowRight
@@ -172,7 +172,7 @@ export default function HomePage() {
                   <div className="space-y-3 p-3">
                     {/* Post 1 — clean minimal */}
                     <div className="bg-slate-50 rounded-xl p-4 text-center">
-                      <div className="w-8 h-8 bg-green-500 rounded-lg mx-auto mb-2" />
+                      <div className="w-8 h-8 bg-violet-500 rounded-lg mx-auto mb-2" />
                       <div className="h-2 w-24 bg-slate-800 rounded-full mx-auto" />
                       <div className="h-1.5 w-32 bg-slate-300 rounded-full mx-auto mt-2" />
                       <div className="h-1.5 w-28 bg-slate-300 rounded-full mx-auto mt-1" />
@@ -210,7 +210,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step) => (
               <div key={step.step} className="text-center">
-                <div className="text-5xl font-bold text-green-500/20 mb-4">
+                <div className="text-5xl font-bold text-violet-500/20 mb-4">
                   {step.step}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -241,17 +241,17 @@ export default function HomePage() {
             {/* Example post 1 — Clean vibe */}
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
               <div className="aspect-square bg-slate-50 p-8 flex flex-col items-center justify-center text-center">
-                <div className="w-12 h-12 bg-green-500 rounded-xl mb-4" />
+                <div className="w-12 h-12 bg-violet-500 rounded-xl mb-4" />
                 <h3 className="text-lg font-bold text-gray-900">
                   Fresh Starts Every Morning
                 </h3>
                 <p className="text-sm text-gray-500 mt-2 px-4">
                   Our doors open at 6am — coffee&apos;s on us for early birds.
                 </p>
-                <div className="mt-4 h-7 w-24 bg-green-500 rounded-lg" />
+                <div className="mt-4 h-7 w-24 bg-violet-500 rounded-lg" />
               </div>
               <div className="p-4 border-t border-gray-100">
-                <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
+                <span className="text-xs font-medium text-violet-600 bg-violet-50 px-2 py-1 rounded">
                   Graphic Post
                 </span>
                 <span className="text-xs text-gray-400 ml-2">Clean & Minimal</span>
@@ -318,8 +318,8 @@ export default function HomePage() {
                 key={feature.title}
                 className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-md transition group"
               >
-                <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-100 transition">
-                  <feature.icon size={20} className="text-green-600" />
+                <div className="w-10 h-10 bg-violet-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-violet-100 transition">
+                  <feature.icon size={20} className="text-violet-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {feature.title}
@@ -359,7 +359,7 @@ export default function HomePage() {
                   "Download images + copy captions",
                 ].map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
-                    <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
+                    <CheckCircle2 size={16} className="text-violet-500 mt-0.5 shrink-0" />
                     {f}
                   </li>
                 ))}
@@ -373,9 +373,9 @@ export default function HomePage() {
             </div>
 
             {/* Pro */}
-            <div className="relative bg-white border-2 border-green-500 ring-1 ring-green-500/20 rounded-2xl p-8 flex flex-col">
+            <div className="relative bg-white border-2 border-violet-500 ring-1 ring-violet-500/20 rounded-2xl p-8 flex flex-col">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-green-500 text-white text-xs font-semibold rounded-full px-3 py-1">
+                <span className="bg-violet-500 text-white text-xs font-semibold rounded-full px-3 py-1">
                   Most Popular
                 </span>
               </div>
@@ -395,14 +395,14 @@ export default function HomePage() {
                   "Priority generation",
                 ].map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
-                    <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
+                    <CheckCircle2 size={16} className="text-violet-500 mt-0.5 shrink-0" />
                     {f}
                   </li>
                 ))}
               </ul>
               <Link
                 href="/signup"
-                className="mt-8 block text-center bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg px-4 py-2.5 transition"
+                className="mt-8 block text-center bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-lg px-4 py-2.5 transition"
               >
                 Start Free Trial
               </Link>
@@ -424,7 +424,7 @@ export default function HomePage() {
                   "Priority support",
                 ].map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
-                    <CheckCircle2 size={16} className="text-green-500 mt-0.5 shrink-0" />
+                    <CheckCircle2 size={16} className="text-violet-500 mt-0.5 shrink-0" />
                     {f}
                   </li>
                 ))}
@@ -489,7 +489,7 @@ export default function HomePage() {
           <div className="mt-8 space-y-3">
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl px-8 py-3.5 text-lg transition group"
+              className="inline-flex items-center gap-2 bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-xl px-8 py-3.5 text-lg transition group"
             >
               Start Free Trial
               <ArrowRight
@@ -499,15 +499,15 @@ export default function HomePage() {
             </Link>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-slate-400 text-sm">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={16} className="text-green-400" />
+                <CheckCircle2 size={16} className="text-violet-400" />
                 14-day free trial
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={16} className="text-green-400" />
+                <CheckCircle2 size={16} className="text-violet-400" />
                 No credit card required
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={16} className="text-green-400" />
+                <CheckCircle2 size={16} className="text-violet-400" />
                 Cancel anytime
               </span>
             </div>

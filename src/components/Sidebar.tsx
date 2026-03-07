@@ -43,7 +43,7 @@ export default function Sidebar() {
       <div className="p-6">
         <Link href="/dashboard" className="inline-block">
           <span className="text-2xl font-bold text-white">
-            fox<span className="text-green-400">trot</span>
+            fox<span className="text-violet-400">trot</span>
           </span>
         </Link>
       </div>
@@ -58,7 +58,7 @@ export default function Sidebar() {
               onClick={() => setMobileOpen(false)}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition ${
                 active
-                  ? "bg-green-500/10 text-green-400"
+                  ? "bg-violet-500/10 text-violet-400"
                   : "text-slate-400 hover:text-white hover:bg-navy-800"
               }`}
             >
@@ -87,7 +87,7 @@ export default function Sidebar() {
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-navy-950 border-b border-navy-800 h-14 flex items-center justify-between px-4">
         <Link href="/dashboard">
           <span className="text-xl font-bold text-white">
-            fox<span className="text-green-400">trot</span>
+            fox<span className="text-violet-400">trot</span>
           </span>
         </Link>
         <button
@@ -122,7 +122,7 @@ export default function Sidebar() {
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition ${
                   active
-                    ? "bg-green-500/10 text-green-400"
+                    ? "bg-violet-500/10 text-violet-400"
                     : "text-slate-400 hover:text-white hover:bg-navy-800"
                 }`}
               >

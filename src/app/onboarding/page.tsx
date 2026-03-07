@@ -42,9 +42,9 @@ export default function OnboardingPage() {
     industry: "",
     logoFile: null,
     logoPreview: "",
-    primaryColor: "#22c55e",
+    primaryColor: "#8b5cf6",
     secondaryColor: "#0f1629",
-    accentColor: "#4ade80",
+    accentColor: "#a78bfa",
     vibe: "",
     contentTone: "friendly",
     targetAudience: "",
@@ -127,9 +127,9 @@ export default function OnboardingPage() {
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition ${
                     isComplete
-                      ? "bg-green-500 text-white"
+                      ? "bg-violet-500 text-white"
                       : isActive
-                      ? "bg-green-500/20 text-green-400 ring-2 ring-green-500"
+                      ? "bg-violet-500/20 text-violet-400 ring-2 ring-violet-500"
                       : "bg-navy-800 text-slate-500"
                   }`}
                 >
@@ -146,7 +146,7 @@ export default function OnboardingPage() {
               {i < stepLabels.length - 1 && (
                 <div
                   className={`flex-1 h-0.5 rounded-full mx-1 ${
-                    isComplete ? "bg-green-500" : "bg-navy-700"
+                    isComplete ? "bg-violet-500" : "bg-navy-700"
                   }`}
                 />
               )}
@@ -178,7 +178,7 @@ export default function OnboardingPage() {
           {step < 4 ? (
             <button
               onClick={() => setStep(step + 1)}
-              className="bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg px-6 py-2.5 text-sm transition"
+              className="bg-violet-500 hover:bg-violet-600 text-white font-semibold rounded-lg px-6 py-2.5 text-sm transition"
             >
               Continue
             </button>
@@ -186,7 +186,7 @@ export default function OnboardingPage() {
             <button
               onClick={handleFinish}
               disabled={saving}
-              className="bg-green-500 hover:bg-green-600 disabled:opacity-50 text-white font-semibold rounded-lg px-6 py-2.5 text-sm transition"
+              className="bg-violet-500 hover:bg-violet-600 disabled:opacity-50 text-white font-semibold rounded-lg px-6 py-2.5 text-sm transition"
             >
               {saving ? "Saving..." : "Finish Setup"}
             </button>

@@ -80,13 +80,13 @@ export default function PricingPage() {
                 key={plan.name}
                 className={`relative rounded-2xl p-8 flex flex-col ${
                   plan.highlighted
-                    ? "bg-navy-900 border-2 border-green-500 ring-1 ring-green-500/20"
+                    ? "bg-navy-900 border-2 border-violet-500 ring-1 ring-violet-500/20"
                     : "bg-navy-900 border border-navy-700"
                 }`}
               >
                 {plan.badge && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-green-500 text-white text-xs font-semibold rounded-full px-3 py-1">
+                    <span className="bg-violet-500 text-white text-xs font-semibold rounded-full px-3 py-1">
                       {plan.badge}
                     </span>
                   </div>
@@ -117,7 +117,7 @@ export default function PricingPage() {
                     >
                       <CheckCircle2
                         size={16}
-                        className="text-green-400 mt-0.5 shrink-0"
+                        className="text-violet-400 mt-0.5 shrink-0"
                       />
                       {feature}
                     </li>
@@ -128,7 +128,7 @@ export default function PricingPage() {
                   href={plan.ctaHref}
                   className={`block text-center font-semibold rounded-lg px-4 py-2.5 transition ${
                     plan.highlighted
-                      ? "bg-green-500 hover:bg-green-600 text-white"
+                      ? "bg-violet-500 hover:bg-violet-600 text-white"
                       : "border border-navy-600 hover:border-navy-500 text-slate-300 hover:text-white"
                   }`}
                 >

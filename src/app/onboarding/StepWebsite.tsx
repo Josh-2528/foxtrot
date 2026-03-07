@@ -71,13 +71,13 @@ export default function StepWebsite({ data, updateData }: Props) {
               value={data.websiteUrl}
               onChange={(e) => updateData({ websiteUrl: e.target.value })}
               placeholder="https://yourbusiness.com.au"
-              className="w-full bg-navy-800 border border-navy-600 rounded-lg pl-9 pr-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
+              className="w-full bg-navy-800 border border-navy-600 rounded-lg pl-9 pr-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
             />
           </div>
           <button
             onClick={handleScrape}
             disabled={scraping || !data.websiteUrl}
-            className="bg-green-500/10 hover:bg-green-500/20 disabled:opacity-50 text-green-400 font-medium rounded-lg px-4 py-2.5 text-sm transition flex items-center gap-2 shrink-0"
+            className="bg-violet-500/10 hover:bg-violet-500/20 disabled:opacity-50 text-violet-400 font-medium rounded-lg px-4 py-2.5 text-sm transition flex items-center gap-2 shrink-0"
           >
             {scraping ? (
               <Loader2 size={16} className="animate-spin" />
@@ -91,7 +91,7 @@ export default function StepWebsite({ data, updateData }: Props) {
           <p className="text-amber-400 text-xs mt-2">{error}</p>
         )}
         {scraped && !error && (
-          <p className="text-green-400 text-xs mt-2">
+          <p className="text-violet-400 text-xs mt-2">
             Details pre-filled from your website. Review and adjust below.
           </p>
         )}
@@ -107,7 +107,7 @@ export default function StepWebsite({ data, updateData }: Props) {
             value={data.businessName}
             onChange={(e) => updateData({ businessName: e.target.value })}
             placeholder="Your Business Name"
-            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
+            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
           />
         </div>
 
@@ -122,7 +122,7 @@ export default function StepWebsite({ data, updateData }: Props) {
             }
             rows={3}
             placeholder="Tell us what your business does..."
-            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm resize-none"
+            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm resize-none"
           />
         </div>
 
@@ -133,7 +133,7 @@ export default function StepWebsite({ data, updateData }: Props) {
           <select
             value={data.industry}
             onChange={(e) => updateData({ industry: e.target.value })}
-            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
+            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
           >
             <option value="">Select an industry</option>
             <option value="cafe_restaurant">Cafe / Restaurant</option>

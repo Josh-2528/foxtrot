@@ -106,7 +106,7 @@ export default function PrivacyPage() {
                 For privacy-related inquiries, contact us at{" "}
                 <a
                   href="mailto:josh@obvitech.com.au"
-                  className="text-green-400 hover:text-green-300"
+                  className="text-violet-400 hover:text-violet-300"
                 >
                   josh@obvitech.com.au
                 </a>

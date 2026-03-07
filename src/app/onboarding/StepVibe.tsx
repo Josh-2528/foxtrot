@@ -37,7 +37,7 @@ const vibes = [
   {
     id: "dark_premium",
     title: "Dark & Premium",
-    description: "Dark backgrounds, gold/green accents, luxury feel.",
+    description: "Dark backgrounds, gold/violet accents, luxury feel.",
     mockup: (
       <div className="space-y-2 p-3 bg-gray-900 rounded">
         <div className="h-2 w-16 bg-amber-400 rounded-full" />
@@ -66,10 +66,10 @@ const vibes = [
     description: "Muted tones, organic textures, warm and grounded.",
     mockup: (
       <div className="space-y-2 p-3 bg-stone-100 rounded-lg">
-        <div className="h-2 w-16 bg-green-700 rounded-full" />
+        <div className="h-2 w-16 bg-violet-700 rounded-full" />
         <div className="h-1.5 w-full bg-stone-300 rounded-full" />
         <div className="h-1.5 w-4/5 bg-stone-300 rounded-full" />
-        <div className="h-6 w-20 bg-green-700 rounded-full mt-3" />
+        <div className="h-6 w-20 bg-violet-700 rounded-full mt-3" />
       </div>
     ),
   },
@@ -106,7 +106,7 @@ export default function StepVibe({ data, updateData }: Props) {
               onClick={() => updateData({ vibe: vibe.id })}
               className={`text-left rounded-xl border-2 p-4 transition ${
                 selected
-                  ? "border-green-500 bg-green-500/5"
+                  ? "border-violet-500 bg-violet-500/5"
                   : "border-navy-600 hover:border-navy-500 bg-navy-800"
               }`}
             >
@@ -117,7 +117,7 @@ export default function StepVibe({ data, updateData }: Props) {
 
               <h3
                 className={`text-sm font-semibold mb-1 ${
-                  selected ? "text-green-400" : "text-white"
+                  selected ? "text-violet-400" : "text-white"
                 }`}
               >
                 {vibe.title}

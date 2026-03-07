@@ -53,7 +53,7 @@ Foxtrot is a standalone SaaS that generates ready-to-post social media content f
 - Show 6 visual style cards, each with a sample Instagram post mockup:
   - **Clean & Minimal** — white space, simple layouts, thin fonts
   - **Bold & Loud** — big text, high contrast, punchy colours
-  - **Dark & Premium** — dark backgrounds, gold/green accents, luxury feel
+  - **Dark & Premium** — dark backgrounds, gold/violet accents, luxury feel
   - **Bright & Fun** — colourful, playful, energetic
   - **Earthy & Natural** — muted tones, organic textures, warm
   - **Corporate & Professional** — structured, navy/grey, formal
@@ -309,14 +309,14 @@ Foxtrot is a standalone SaaS that generates ready-to-post social media content f
 
 ## Landing Page Structure
 
-**Design:** Dark premium theme matching WashBot/ReviewFlow aesthetic. Navy hero, white/grey content sections, green accent CTAs.
+**Design:** Dark premium theme matching WashBot/ReviewFlow aesthetic. Navy hero, white/grey content sections, violet/purple accent CTAs.
 
-**NAV:** Foxtrot logo + name | Features | Pricing | FAQ | Login | Start Free Trial (green CTA)
+**NAV:** Foxtrot logo + name | Features | Pricing | FAQ | Login | Start Free Trial (violet CTA)
 
 **HERO (dark navy):**
 - Headline: "Your Social Media. Created By AI. On Brand. Every Time."
 - Subhead: "Foxtrot generates ready-to-post content for your business — visuals, captions, hashtags, and all. Set up your brand once, get weeks of content in minutes."
-- CTAs: "Start Free Trial →" (green) + "See It In Action" (ghost/outline → scrolls to demo section)
+- CTAs: "Start Free Trial →" (violet) + "See It In Action" (ghost/outline → scrolls to demo section)
 - Right side: mockup showing a phone with an Instagram feed of Foxtrot-generated posts
 
 **HOW IT WORKS (white):**
@@ -552,9 +552,9 @@ create table public.brand_kits (
   id uuid primary key default uuid_generate_v4(),
   user_id uuid not null references public.users(id) on delete cascade,
   logo_url text,
-  primary_colour text default '#10b981',
+  primary_colour text default '#8b5cf6',
   secondary_colour text default '#0f1729',
-  accent_colour text default '#f59e0b',
+  accent_colour text default '#a78bfa',
   background_colour text default '#ffffff',
   text_colour text default '#111827',
   font_preference text default 'Inter',
@@ -736,8 +736,8 @@ create trigger posts_updated_at before update on public.posts
 - **Navy (dark sections):** #0f1729
 - **White:** #ffffff
 - **Light grey (alt sections):** #f8fafc
-- **Green (primary CTA):** #10b981
-- **Green hover:** #059669
+- **Violet (primary CTA):** #8b5cf6
+- **Violet hover:** #7c3aed
 - **Text primary:** #111827
 - **Text secondary:** #6b7280
 - **Border:** #e5e7eb
@@ -748,8 +748,8 @@ create trigger posts_updated_at before update on public.posts
 - **Mono/code:** JetBrains Mono
 
 ### Components
-- Buttons: rounded-lg, green primary, navy secondary, ghost/outline tertiary
+- Buttons: rounded-lg, violet primary, navy secondary, ghost/outline tertiary
 - Cards: white bg, subtle border, rounded-xl, shadow-sm
-- Inputs: rounded-lg, border-gray-300, focus ring green
+- Inputs: rounded-lg, border-gray-300, focus ring violet
 - Modals: centered, backdrop blur, rounded-2xl
 - Mobile: fully responsive, hamburger nav, stacked layouts

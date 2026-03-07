@@ -11,7 +11,7 @@ export default function OnboardingLayout({
         <div className="max-w-4xl mx-auto px-4 h-14 flex items-center">
           <Link href="/">
             <span className="text-xl font-bold text-white">
-              fox<span className="text-green-400">trot</span>
+              fox<span className="text-violet-400">trot</span>
             </span>
           </Link>
         </div>

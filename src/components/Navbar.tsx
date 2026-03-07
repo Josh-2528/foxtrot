@@ -13,7 +13,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl font-bold text-white">
-              fox<span className="text-green-400">trot</span>
+              fox<span className="text-violet-400">trot</span>
             </span>
           </Link>
 
@@ -39,7 +39,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/signup"
-              className="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-lg px-4 py-2 transition"
+              className="bg-violet-500 hover:bg-violet-600 text-white text-sm font-semibold rounded-lg px-4 py-2 transition"
             >
               Start Free Trial
             </Link>
@@ -83,7 +83,7 @@ export default function Navbar() {
             <Link
               href="/signup"
               onClick={() => setMobileOpen(false)}
-              className="block bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-lg px-4 py-2.5 text-center transition"
+              className="block bg-violet-500 hover:bg-violet-600 text-white text-sm font-semibold rounded-lg px-4 py-2.5 text-center transition"
             >
               Start Free Trial
             </Link>

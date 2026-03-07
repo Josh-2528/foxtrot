@@ -68,10 +68,10 @@ export default function StepBrandKit({ data, updateData }: Props) {
         ) : (
           <button
             onClick={() => fileRef.current?.click()}
-            className="w-full border-2 border-dashed border-navy-600 hover:border-green-500/40 rounded-xl p-8 flex flex-col items-center gap-3 transition group"
+            className="w-full border-2 border-dashed border-navy-600 hover:border-violet-500/40 rounded-xl p-8 flex flex-col items-center gap-3 transition group"
           >
-            <div className="w-12 h-12 bg-navy-800 rounded-lg flex items-center justify-center group-hover:bg-green-500/10 transition">
-              <Upload size={20} className="text-slate-400 group-hover:text-green-400" />
+            <div className="w-12 h-12 bg-navy-800 rounded-lg flex items-center justify-center group-hover:bg-violet-500/10 transition">
+              <Upload size={20} className="text-slate-400 group-hover:text-violet-400" />
             </div>
             <div className="text-center">
               <p className="text-sm font-medium text-slate-300">

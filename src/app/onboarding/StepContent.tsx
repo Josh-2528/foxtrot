@@ -54,13 +54,13 @@ export default function StepContent({ data, updateData }: Props) {
                 onClick={() => updateData({ contentTone: tone.id })}
                 className={`text-left rounded-lg border-2 p-4 transition ${
                   selected
-                    ? "border-green-500 bg-green-500/5"
+                    ? "border-violet-500 bg-violet-500/5"
                     : "border-navy-600 hover:border-navy-500 bg-navy-800"
                 }`}
               >
                 <p
                   className={`text-sm font-semibold mb-0.5 ${
-                    selected ? "text-green-400" : "text-white"
+                    selected ? "text-violet-400" : "text-white"
                   }`}
                 >
                   {tone.label}
@@ -82,7 +82,7 @@ export default function StepContent({ data, updateData }: Props) {
             value={data.targetAudience}
             onChange={(e) => updateData({ targetAudience: e.target.value })}
             placeholder="e.g., Local families, young professionals, foodies"
-            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
+            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
           />
         </div>
 
@@ -95,7 +95,7 @@ export default function StepContent({ data, updateData }: Props) {
             value={data.keyServices}
             onChange={(e) => updateData({ keyServices: e.target.value })}
             placeholder="e.g., Coffee, brunch, catering, events (comma-separated)"
-            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
+            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
           />
           <p className="text-xs text-slate-500 mt-1">Separate with commas</p>
         </div>
@@ -111,7 +111,7 @@ export default function StepContent({ data, updateData }: Props) {
               updateData({ uniqueSellingPoints: e.target.value })
             }
             placeholder="e.g., Locally owned, award-winning, eco-friendly (comma-separated)"
-            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-500/40 focus:border-green-500 transition text-sm"
+            className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
           />
           <p className="text-xs text-slate-500 mt-1">Separate with commas</p>
         </div>
