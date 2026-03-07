@@ -22,7 +22,7 @@ export async function POST() {
   // Fetch user profile
   const { data: profile } = await admin
     .from("users")
-    .select("business_name, industry, business_description, posting_frequency")
+    .select("business_name, industry, business_description, key_services, posting_frequency")
     .eq("id", user.id)
     .single();
 
@@ -50,6 +50,7 @@ export async function POST() {
       businessName: profile.business_name || "My Business",
       industry: profile.industry || "General",
       businessDescription: profile.business_description || "",
+      keyServices: profile.key_services || "",
       postingFrequency: profile.posting_frequency || "3_week",
       previousTopics,
     });

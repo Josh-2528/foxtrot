@@ -1,13 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Settings, User, Bell, CreditCard, Loader2 } from "lucide-react";
+import { Settings, User, Bell, CreditCard, Loader2, Building2 } from "lucide-react";
 import Toggle from "@/components/Toggle";
 
 interface UserProfile {
   email: string;
   business_name: string | null;
+  website_url: string | null;
   industry: string | null;
+  business_description: string | null;
+  key_services: string | null;
   posting_frequency: string;
   caption_style: string;
   caption_tone: string;
@@ -26,7 +29,10 @@ export default function SettingsPage() {
   const [profile, setProfile] = useState<UserProfile>({
     email: "",
     business_name: "",
+    website_url: "",
     industry: "",
+    business_description: "",
+    key_services: "",
     posting_frequency: "3_week",
     caption_style: "medium",
     caption_tone: "casual",
@@ -61,7 +67,10 @@ export default function SettingsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           business_name: profile.business_name,
+          website_url: profile.website_url,
           industry: profile.industry,
+          business_description: profile.business_description,
+          key_services: profile.key_services,
           posting_frequency: profile.posting_frequency,
           caption_style: profile.caption_style,
           caption_tone: profile.caption_tone,
@@ -106,7 +115,7 @@ export default function SettingsPage() {
         <div>
           <h1 className="text-2xl font-bold text-white">Settings</h1>
           <p className="text-slate-400 text-sm mt-1">
-            Manage your account, preferences, and billing.
+            Manage your account, business info, preferences, and billing.
           </p>
         </div>
         <button
@@ -144,15 +153,92 @@ export default function SettingsPage() {
               />
               <p className="text-xs text-slate-500 mt-1">Contact support to change your email.</p>
             </div>
+          </div>
+        </div>
+
+        {/* Business Info */}
+        <div className="bg-navy-900 border border-navy-700 rounded-xl p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-8 bg-violet-500/10 rounded-lg flex items-center justify-center">
+              <Building2 size={16} className="text-violet-400" />
+            </div>
+            <h3 className="font-semibold text-white">Business Info</h3>
+          </div>
+          <p className="text-xs text-slate-400 mb-5">
+            This information helps the AI generate better, more relevant content for your business.
+          </p>
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1.5">Business Name</label>
+                <input
+                  type="text"
+                  value={profile.business_name || ""}
+                  onChange={(e) => updateField("business_name", e.target.value)}
+                  placeholder="Your Business"
+                  className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1.5">Website</label>
+                <input
+                  type="url"
+                  value={profile.website_url || ""}
+                  onChange={(e) => updateField("website_url", e.target.value)}
+                  placeholder="https://yourbusiness.com.au"
+                  className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
+                />
+              </div>
+            </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Business Name</label>
-              <input
-                type="text"
-                value={profile.business_name || ""}
-                onChange={(e) => updateField("business_name", e.target.value)}
-                placeholder="Your Business"
-                className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Industry</label>
+              <select
+                value={profile.industry || ""}
+                onChange={(e) => updateField("industry", e.target.value)}
+                className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
+              >
+                <option value="">Select an industry</option>
+                <option value="car_wash_self_serve">Car Wash — Self-Serve</option>
+                <option value="car_wash_full_service">Car Wash — Full Service</option>
+                <option value="car_wash_express">Car Wash — Express</option>
+                <option value="car_wash_detailing">Car Wash — Detailing</option>
+                <option value="car_wash_multi">Car Wash — Multi-Location</option>
+                <option value="auto_service">Auto Service</option>
+                <option value="retail">Retail</option>
+                <option value="hospitality">Hospitality</option>
+                <option value="health_wellness">Health & Wellness</option>
+                <option value="professional_services">Professional Services</option>
+                <option value="trades">Trades & Construction</option>
+                <option value="food_beverage">Food & Beverage</option>
+                <option value="beauty">Beauty & Personal Care</option>
+                <option value="fitness">Fitness & Sport</option>
+                <option value="education">Education</option>
+                <option value="technology">Technology</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Business Description</label>
+              <textarea
+                value={profile.business_description || ""}
+                onChange={(e) => updateField("business_description", e.target.value)}
+                placeholder="What does your business do? Describe it in 1-3 sentences."
+                rows={3}
+                className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm resize-none"
               />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Key Services / Products</label>
+              <textarea
+                value={profile.key_services || ""}
+                onChange={(e) => updateField("key_services", e.target.value)}
+                placeholder="e.g. Express wash, Full detail, Interior clean, Ceramic coating"
+                rows={2}
+                className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm resize-none"
+              />
+              <p className="text-xs text-slate-500 mt-1">
+                Comma-separated list of your main services or products. The AI uses these to generate more targeted content.
+              </p>
             </div>
           </div>
         </div>

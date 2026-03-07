@@ -14,6 +14,7 @@ create table public.users (
   website_url text,
   industry text,
   business_description text,
+  key_services text,
   plan_id text default 'trial',
   trial_started_at timestamptz default now(),
   stripe_customer_id text,
@@ -35,7 +36,7 @@ create table public.users (
 -- ============================================================
 create table public.brand_kits (
   id uuid primary key default uuid_generate_v4(),
-  user_id uuid not null references public.users(id) on delete cascade,
+  user_id uuid not null unique references public.users(id) on delete cascade,
   logo_url text,
   primary_colour text default '#8b5cf6',
   secondary_colour text default '#0f1729',

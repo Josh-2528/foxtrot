@@ -5,6 +5,7 @@ export interface User {
   website_url: string | null;
   industry: string | null;
   business_description: string | null;
+  key_services: string | null;
   plan_id: string;
   posting_frequency: string;
   caption_style: string;

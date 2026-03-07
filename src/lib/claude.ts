@@ -108,6 +108,7 @@ interface IdeaGenerationParams {
   businessName: string;
   industry: string;
   businessDescription: string;
+  keyServices: string;
   postingFrequency: string;
   previousTopics: string[];
 }
@@ -139,6 +140,7 @@ Rules:
 Business: ${params.businessName}
 Industry: ${params.industry || "General"}
 What they do: ${params.businessDescription || "Not specified"}
+Key services/products: ${params.keyServices || "Not specified"}
 Posting frequency: ${params.postingFrequency}
 ${previousSection}
 

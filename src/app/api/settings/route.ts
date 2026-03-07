@@ -49,8 +49,10 @@ export async function PUT(request: Request) {
   const allowedFields: Record<string, unknown> = {};
   const updatable = [
     "business_name",
+    "website_url",
     "industry",
     "business_description",
+    "key_services",
     "posting_frequency",
     "caption_style",
     "caption_tone",

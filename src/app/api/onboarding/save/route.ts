@@ -36,29 +36,35 @@ export async function POST(request: Request) {
     );
   }
 
-  // Upsert brand kit
-  const { error: brandError } = await admin.from("brand_kits").upsert(
-    {
-      user_id: user.id,
-      logo_url: body.logo_url || null,
-      primary_colour: body.primary_color || "#8b5cf6",
-      secondary_colour: body.secondary_color || "#0f1729",
-      accent_colour: body.accent_color || "#a78bfa",
-      vibe: body.vibe || "clean_minimal",
-      extracted_from_website: body.website_url
-        ? {
-            url: body.website_url,
-            scraped_colors: [
-              body.primary_color,
-              body.secondary_color,
-              body.accent_color,
-            ],
-          }
-        : null,
-      updated_at: new Date().toISOString(),
-    },
-    { onConflict: "user_id" }
-  );
+  // Save brand kit (select then update/insert)
+  const brandData = {
+    logo_url: body.logo_url || null,
+    primary_colour: body.primary_color || "#8b5cf6",
+    secondary_colour: body.secondary_color || "#0f1729",
+    accent_colour: body.accent_color || "#a78bfa",
+    vibe: body.vibe || "clean_minimal",
+    extracted_from_website: body.website_url
+      ? {
+          url: body.website_url,
+          scraped_colors: [
+            body.primary_color,
+            body.secondary_color,
+            body.accent_color,
+          ],
+        }
+      : null,
+    updated_at: new Date().toISOString(),
+  };
+
+  const { data: existingKit } = await admin
+    .from("brand_kits")
+    .select("id")
+    .eq("user_id", user.id)
+    .single();
+
+  const { error: brandError } = existingKit
+    ? await admin.from("brand_kits").update(brandData).eq("user_id", user.id)
+    : await admin.from("brand_kits").insert({ user_id: user.id, ...brandData });
 
   if (brandError) {
     console.error("Brand kit save error:", brandError);

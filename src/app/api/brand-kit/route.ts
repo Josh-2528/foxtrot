@@ -49,7 +49,7 @@ export async function GET() {
   return NextResponse.json({ brand_kit: data });
 }
 
-// PUT /api/brand-kit — upsert brand kit with partial fields
+// PUT /api/brand-kit — save brand kit (select then update/insert)
 export async function PUT(request: Request) {
   const supabase = await createClient();
   const {
@@ -63,31 +63,45 @@ export async function PUT(request: Request) {
   const body = await request.json();
   const admin = createAdminClient();
 
-  const { error } = await admin.from("brand_kits").upsert(
-    {
+  // Build update payload from provided fields
+  const updates: Record<string, unknown> = {
+    updated_at: new Date().toISOString(),
+  };
+  const fields = [
+    "logo_url",
+    "primary_colour",
+    "secondary_colour",
+    "accent_colour",
+    "background_colour",
+    "text_colour",
+    "font_preference",
+    "vibe",
+  ];
+  for (const field of fields) {
+    if (body[field] !== undefined) {
+      updates[field] = body[field];
+    }
+  }
+
+  // Check if brand kit already exists for this user
+  const { data: existing } = await admin
+    .from("brand_kits")
+    .select("id")
+    .eq("user_id", user.id)
+    .single();
+
+  let error;
+  if (existing) {
+    ({ error } = await admin
+      .from("brand_kits")
+      .update(updates)
+      .eq("user_id", user.id));
+  } else {
+    ({ error } = await admin.from("brand_kits").insert({
       user_id: user.id,
-      ...(body.logo_url !== undefined && { logo_url: body.logo_url }),
-      ...(body.primary_colour !== undefined && {
-        primary_colour: body.primary_colour,
-      }),
-      ...(body.secondary_colour !== undefined && {
-        secondary_colour: body.secondary_colour,
-      }),
-      ...(body.accent_colour !== undefined && {
-        accent_colour: body.accent_colour,
-      }),
-      ...(body.background_colour !== undefined && {
-        background_colour: body.background_colour,
-      }),
-      ...(body.text_colour !== undefined && { text_colour: body.text_colour }),
-      ...(body.font_preference !== undefined && {
-        font_preference: body.font_preference,
-      }),
-      ...(body.vibe !== undefined && { vibe: body.vibe }),
-      updated_at: new Date().toISOString(),
-    },
-    { onConflict: "user_id" }
-  );
+      ...updates,
+    }));
+  }
 
   if (error) {
     console.error("Brand kit update error:", error);
