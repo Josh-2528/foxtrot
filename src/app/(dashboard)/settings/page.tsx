@@ -22,68 +22,101 @@ interface UserProfile {
   trial_started_at: string | null;
 }
 
+const DEFAULT_PROFILE: UserProfile = {
+  email: "",
+  business_name: null,
+  website_url: null,
+  industry: null,
+  business_description: null,
+  key_services: null,
+  posting_frequency: "3_week",
+  caption_style: "medium",
+  caption_tone: "casual",
+  default_cta: "Link in bio",
+  default_hashtags: null,
+  email_new_content: true,
+  email_weekly_summary: true,
+  plan_id: "trial",
+  trial_started_at: null,
+};
+
 export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [profile, setProfile] = useState<UserProfile>({
-    email: "",
-    business_name: "",
-    website_url: "",
-    industry: "",
-    business_description: "",
-    key_services: "",
-    posting_frequency: "3_week",
-    caption_style: "medium",
-    caption_tone: "casual",
-    default_cta: "Link in bio",
-    default_hashtags: "",
-    email_new_content: true,
-    email_weekly_summary: true,
-    plan_id: "trial",
-    trial_started_at: null,
-  });
+  const [saveError, setSaveError] = useState(false);
+  const [profile, setProfile] = useState<UserProfile>({ ...DEFAULT_PROFILE });
 
   useEffect(() => {
     fetch("/api/settings")
       .then((r) => r.json())
       .then((data) => {
-        if (data.user) setProfile(data.user);
+        console.log("[settings page] API response:", JSON.stringify(data, null, 2));
+        if (data.user) {
+          // Merge API data with defaults — ensures non-nullable fields always have a value
+          setProfile({
+            ...DEFAULT_PROFILE,
+            ...data.user,
+            // Force defaults for fields that must not be undefined/null
+            posting_frequency: data.user.posting_frequency || "3_week",
+            caption_style: data.user.caption_style || "medium",
+            caption_tone: data.user.caption_tone || "casual",
+            default_cta: data.user.default_cta || "Link in bio",
+            email_new_content: data.user.email_new_content ?? true,
+            email_weekly_summary: data.user.email_weekly_summary ?? true,
+            plan_id: data.user.plan_id || "trial",
+          });
+        }
       })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
 
-  function updateField(field: string, value: unknown) {
+  function updateField(field: string, value: string | boolean) {
+    console.log("[settings page] updateField:", field, "=", value);
     setProfile((prev) => ({ ...prev, [field]: value }));
     setSaved(false);
+    setSaveError(false);
   }
 
   async function handleSave() {
     setSaving(true);
+    setSaveError(false);
     try {
-      await fetch("/api/settings", {
+      const payload = {
+        business_name: profile.business_name,
+        website_url: profile.website_url,
+        industry: profile.industry,
+        business_description: profile.business_description,
+        key_services: profile.key_services,
+        posting_frequency: profile.posting_frequency,
+        caption_style: profile.caption_style,
+        caption_tone: profile.caption_tone,
+        default_cta: profile.default_cta,
+        default_hashtags: profile.default_hashtags,
+        email_new_content: profile.email_new_content,
+        email_weekly_summary: profile.email_weekly_summary,
+      };
+      console.log("[settings page] saving payload:", JSON.stringify(payload, null, 2));
+
+      const res = await fetch("/api/settings", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          business_name: profile.business_name,
-          website_url: profile.website_url,
-          industry: profile.industry,
-          business_description: profile.business_description,
-          key_services: profile.key_services,
-          posting_frequency: profile.posting_frequency,
-          caption_style: profile.caption_style,
-          caption_tone: profile.caption_tone,
-          default_cta: profile.default_cta,
-          default_hashtags: profile.default_hashtags,
-          email_new_content: profile.email_new_content,
-          email_weekly_summary: profile.email_weekly_summary,
-        }),
+        body: JSON.stringify(payload),
       });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        console.error("[settings page] save failed:", res.status, errorData);
+        setSaveError(true);
+        return;
+      }
+
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
     } catch (err) {
       console.error("Save error:", err);
+      setSaveError(true);
     } finally {
       setSaving(false);
     }
@@ -121,10 +154,16 @@ export default function SettingsPage() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-violet-500 hover:bg-violet-600 disabled:opacity-50 text-white font-semibold rounded-lg px-5 py-2.5 text-sm transition flex items-center gap-2"
+          className={`${
+            saveError
+              ? "bg-red-500 hover:bg-red-600"
+              : "bg-violet-500 hover:bg-violet-600"
+          } disabled:opacity-50 text-white font-semibold rounded-lg px-5 py-2.5 text-sm transition flex items-center gap-2`}
         >
           {saving ? (
             <Loader2 size={14} className="animate-spin" />
+          ) : saveError ? (
+            "Save Failed — Retry"
           ) : saved ? (
             "Saved!"
           ) : (
@@ -148,7 +187,7 @@ export default function SettingsPage() {
               <input
                 type="email"
                 disabled
-                value={profile.email}
+                value={profile.email || ""}
                 className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-slate-400 text-sm cursor-not-allowed"
               />
               <p className="text-xs text-slate-500 mt-1">Contact support to change your email.</p>
@@ -173,7 +212,7 @@ export default function SettingsPage() {
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Business Name</label>
                 <input
                   type="text"
-                  value={profile.business_name || ""}
+                  value={profile.business_name ?? ""}
                   onChange={(e) => updateField("business_name", e.target.value)}
                   placeholder="Your Business"
                   className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
@@ -183,7 +222,7 @@ export default function SettingsPage() {
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Website</label>
                 <input
                   type="url"
-                  value={profile.website_url || ""}
+                  value={profile.website_url ?? ""}
                   onChange={(e) => updateField("website_url", e.target.value)}
                   placeholder="https://yourbusiness.com.au"
                   className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500 transition text-sm"
@@ -193,7 +232,7 @@ export default function SettingsPage() {
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1.5">Industry</label>
               <select
-                value={profile.industry || ""}
+                value={profile.industry ?? ""}
                 onChange={(e) => updateField("industry", e.target.value)}
                 className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
               >
@@ -220,7 +259,7 @@ export default function SettingsPage() {
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1.5">Business Description</label>
               <textarea
-                value={profile.business_description || ""}
+                value={profile.business_description ?? ""}
                 onChange={(e) => updateField("business_description", e.target.value)}
                 placeholder="What does your business do? Describe it in 1-3 sentences."
                 rows={3}
@@ -230,7 +269,7 @@ export default function SettingsPage() {
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1.5">Key Services / Products</label>
               <textarea
-                value={profile.key_services || ""}
+                value={profile.key_services ?? ""}
                 onChange={(e) => updateField("key_services", e.target.value)}
                 placeholder="e.g. Express wash, Full detail, Interior clean, Ceramic coating"
                 rows={2}
@@ -256,7 +295,7 @@ export default function SettingsPage() {
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Caption Style</label>
                 <select
-                  value={profile.caption_style}
+                  value={profile.caption_style || "medium"}
                   onChange={(e) => updateField("caption_style", e.target.value)}
                   className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
                 >
@@ -268,7 +307,7 @@ export default function SettingsPage() {
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Caption Tone</label>
                 <select
-                  value={profile.caption_tone}
+                  value={profile.caption_tone || "casual"}
                   onChange={(e) => updateField("caption_tone", e.target.value)}
                   className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
                 >
@@ -283,7 +322,7 @@ export default function SettingsPage() {
               <label className="block text-sm font-medium text-slate-300 mb-1.5">Default CTA</label>
               <input
                 type="text"
-                value={profile.default_cta || ""}
+                value={profile.default_cta ?? ""}
                 onChange={(e) => updateField("default_cta", e.target.value)}
                 placeholder="Link in bio"
                 className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
@@ -292,7 +331,7 @@ export default function SettingsPage() {
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1.5">Default Hashtags</label>
               <textarea
-                value={profile.default_hashtags || ""}
+                value={profile.default_hashtags ?? ""}
                 onChange={(e) => updateField("default_hashtags", e.target.value)}
                 placeholder="#yourbrand #yourindustry"
                 rows={2}
@@ -302,7 +341,7 @@ export default function SettingsPage() {
             <div>
               <label className="block text-sm font-medium text-slate-300 mb-1.5">Posting Frequency</label>
               <select
-                value={profile.posting_frequency}
+                value={profile.posting_frequency || "3_week"}
                 onChange={(e) => updateField("posting_frequency", e.target.value)}
                 className="w-full bg-navy-800 border border-navy-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/40 text-sm"
               >

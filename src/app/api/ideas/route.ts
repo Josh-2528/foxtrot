@@ -1,9 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient as createServiceClient } from "@supabase/supabase-js";
 
 // GET /api/ideas — list ideas with optional status filter
 export async function GET(request: NextRequest) {
+  // Auth: get user ID from session
   const supabase = await createClient();
   const {
     data: { user },
@@ -15,8 +16,13 @@ export async function GET(request: NextRequest) {
 
   const status = request.nextUrl.searchParams.get("status");
 
-  const admin = createAdminClient();
-  let query = admin
+  // DB: use service role key directly (bypasses RLS)
+  const db = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  let query = db
     .from("content_ideas")
     .select("*")
     .eq("user_id", user.id)
@@ -41,6 +47,7 @@ export async function GET(request: NextRequest) {
 
 // PUT /api/ideas — update an idea by id
 export async function PUT(request: Request) {
+  // Auth: get user ID from session
   const supabase = await createClient();
   const {
     data: { user },
@@ -60,8 +67,13 @@ export async function PUT(request: Request) {
     );
   }
 
-  const admin = createAdminClient();
-  const { error } = await admin
+  // DB: use service role key directly (bypasses RLS)
+  const db = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  const { error } = await db
     .from("content_ideas")
     .update(updates)
     .eq("id", id)
@@ -80,6 +92,7 @@ export async function PUT(request: Request) {
 
 // DELETE /api/ideas — remove an idea by id
 export async function DELETE(request: Request) {
+  // Auth: get user ID from session
   const supabase = await createClient();
   const {
     data: { user },
@@ -98,8 +111,13 @@ export async function DELETE(request: Request) {
     );
   }
 
-  const admin = createAdminClient();
-  const { error } = await admin
+  // DB: use service role key directly (bypasses RLS)
+  const db = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  const { error } = await db
     .from("content_ideas")
     .delete()
     .eq("id", id)

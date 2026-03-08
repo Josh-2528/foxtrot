@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient as createServiceClient } from "@supabase/supabase-js";
 
 // GET /api/settings — load user profile
 export async function GET() {
+  // Auth: get user ID from session
   const supabase = await createClient();
   const {
     data: { user },
@@ -15,9 +16,13 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // Use admin client (service role) to bypass RLS for DB operations
-  const admin = createAdminClient();
-  const { data, error } = await admin
+  // DB: use service role key directly (bypasses RLS)
+  const db = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+
+  const { data, error } = await db
     .from("users")
     .select("*")
     .eq("id", user.id)
@@ -80,6 +85,7 @@ export async function GET() {
 
 // PUT /api/settings — update user profile fields
 export async function PUT(request: Request) {
+  // Auth: get user ID from session
   const supabase = await createClient();
   const {
     data: { user },
@@ -90,10 +96,17 @@ export async function PUT(request: Request) {
   }
 
   const body = await request.json();
-  console.log("[settings PUT] incoming request body:", JSON.stringify(body, null, 2));
+  console.log(
+    "[settings PUT] incoming request body:",
+    JSON.stringify(body, null, 2)
+  );
   console.log("[settings PUT] user ID being updated:", user.id);
 
-  const admin = createAdminClient();
+  // DB: use service role key directly (bypasses RLS)
+  const db = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
 
   // Only allow updating specific fields
   const allowedFields: Record<string, unknown> = {};
@@ -125,7 +138,12 @@ export async function PUT(request: Request) {
     );
   }
 
-  const { data: updateData, error } = await admin
+  console.log(
+    "[settings PUT] fields being updated:",
+    JSON.stringify(allowedFields, null, 2)
+  );
+
+  const { data: updateData, error } = await db
     .from("users")
     .update(allowedFields)
     .eq("id", user.id)

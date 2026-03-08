@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient as createServiceClient } from "@supabase/supabase-js";
 import {
   callClaude,
   parseJsonFromResponse,
@@ -8,6 +8,7 @@ import {
 } from "@/lib/claude";
 
 export async function POST(request: Request) {
+  // Auth: get user ID from session
   const supabase = await createClient();
   const {
     data: { user },
@@ -27,10 +28,14 @@ export async function POST(request: Request) {
     );
   }
 
-  const admin = createAdminClient();
+  // DB: use service role key directly (bypasses RLS)
+  const db = createServiceClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
 
   // Fetch user profile for defaults
-  const { data: profile } = await admin
+  const { data: profile } = await db
     .from("users")
     .select(
       "business_name, industry, caption_style, caption_tone, default_cta, default_hashtags"
