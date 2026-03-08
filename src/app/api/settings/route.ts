@@ -9,6 +9,8 @@ export async function GET() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  console.log("[settings GET] auth user ID:", user?.id ?? "null");
+
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -21,9 +23,14 @@ export async function GET() {
     .eq("id", user.id)
     .single();
 
+  console.log(
+    "[settings GET] raw Supabase result:",
+    JSON.stringify({ data, error }, null, 2)
+  );
+
   // Handle "no rows found" — user row may not exist yet
   if (error && error.code === "PGRST116") {
-    return NextResponse.json({
+    const responseBody = {
       user: {
         id: user.id,
         email: user.email,
@@ -44,17 +51,31 @@ export async function GET() {
         onboarding_completed: false,
         created_at: new Date().toISOString(),
       },
-    });
+    };
+    console.log(
+      "[settings GET] returning defaults (PGRST116):",
+      JSON.stringify(responseBody, null, 2)
+    );
+    return NextResponse.json(responseBody);
   }
 
   if (error) {
+    console.error(
+      "[settings GET] query error:",
+      JSON.stringify(error, null, 2)
+    );
     return NextResponse.json(
       { error: "Failed to load settings" },
       { status: 500 }
     );
   }
 
-  return NextResponse.json({ user: data });
+  const responseBody = { user: data };
+  console.log(
+    "[settings GET] returning user data:",
+    JSON.stringify(responseBody, null, 2)
+  );
+  return NextResponse.json(responseBody);
 }
 
 // PUT /api/settings — update user profile fields
@@ -69,6 +90,9 @@ export async function PUT(request: Request) {
   }
 
   const body = await request.json();
+  console.log("[settings PUT] incoming request body:", JSON.stringify(body, null, 2));
+  console.log("[settings PUT] user ID being updated:", user.id);
+
   const admin = createAdminClient();
 
   // Only allow updating specific fields
@@ -101,10 +125,16 @@ export async function PUT(request: Request) {
     );
   }
 
-  const { error } = await admin
+  const { data: updateData, error } = await admin
     .from("users")
     .update(allowedFields)
-    .eq("id", user.id);
+    .eq("id", user.id)
+    .select();
+
+  console.log(
+    "[settings PUT] Supabase update result:",
+    JSON.stringify({ data: updateData, error }, null, 2)
+  );
 
   if (error) {
     console.error("Settings update error:", error);
