@@ -19,10 +19,10 @@ export async function POST() {
 
   const admin = createAdminClient();
 
-  // Fetch user profile
+  // Fetch user profile — use select("*") so it works even before key_services migration runs
   const { data: profile } = await admin
     .from("users")
-    .select("business_name, industry, business_description, key_services, posting_frequency")
+    .select("*")
     .eq("id", user.id)
     .single();
 
